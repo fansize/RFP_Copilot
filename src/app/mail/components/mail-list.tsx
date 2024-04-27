@@ -67,21 +67,26 @@ export function MailList({ items }: MailListProps) {
                   })}
                 </div>
               </div>
-              {/* <div className="text-xs font-medium">{item.subject}</div> */}
+              <div className="text-xs font-medium">{item.subject}</div>
             </div>
             <div className="line-clamp-2 text-xs text-muted-foreground">
               {item.text.substring(0, 300)}
             </div>
-            {item.labels.length ? (
-              <div className="flex items-center gap-2">
-                {item.labels.map((label) => (
-                  <Badge key={label} variant="outline" className="items-center">
-                    {labelIcons[label]}
-                    {label}
-                  </Badge>
-                ))}
+            <div className="flex flex-row justify-between items-center w-full">
+              <div>
+                {item.labels.length ? (
+                  <div className="flex items-center gap-2">
+                    {item.labels.map((label) => (
+                      <Badge key={label} variant="outline" className="items-center">
+                        {labelIcons[label]}
+                        {label}
+                      </Badge>
+                    ))}
+                  </div>
+                ) : null}
               </div>
-            ) : null}
+              <div className="text-xs">{"similarity score " + (item.similarity * 100).toFixed(1) + "%"}</div>
+            </div>
           </button>
         ))}
       </div>

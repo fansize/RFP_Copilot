@@ -19,6 +19,13 @@ import {
   AvatarFallback,
   AvatarImage,
 } from "@/components/ui/avatar"
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
 import { Button } from "@/components/ui/button"
 import { Calendar } from "@/components/ui/calendar"
 import { Badge } from "@/components/ui/badge"
@@ -49,8 +56,19 @@ export function MailDisplay({ mail }: MailDisplayProps) {
 
   return (
     <div className="flex h-full flex-col">
-      <div className="flex justify-between items-center px-4 pt-4 pb-2">
-        <p className="font-bold">AI Summary</p>
+      <div className="flex justify-between items-center pl-3 pr-4 pt-4 pb-3">
+        <div>
+          <Select>
+            <SelectTrigger className="w-[180px]">
+              <SelectValue placeholder="AI Summary" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="light">AI Summary</SelectItem>
+              <SelectItem value="dark">Intelligent Product Matcher</SelectItem>
+              {/* <SelectItem value="system">Product Matcher</SelectItem> */}
+            </SelectContent>
+          </Select>
+        </div>
         <div className="flex items-center gap-2">
           <Tooltip>
             <TooltipTrigger asChild>
