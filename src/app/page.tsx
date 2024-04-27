@@ -23,11 +23,11 @@ export default function Page() {
       <div className="flex flex-col px-4 pt-4 gap-4">
         <div className="flex items-center justify-between space-y-2">
           <h2 className="text-3xl font-black tracking-tight">RFP Copilot Dashboard</h2>
-          <div className="flex items-center space-x-2">
+          <div className="hidden md:flex items-center space-x-2">
             <CalendarDateRangePicker />
           </div>
         </div>
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4 ">
+        <div className="grid gap-4 grid-cols-2 md:grid-cols-2 lg:grid-cols-4 ">
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">
