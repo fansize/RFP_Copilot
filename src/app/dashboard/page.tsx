@@ -25,6 +25,7 @@ import { UserNav } from "./components/user-nav"
 import { Table_RFPs } from "./components/table-rfp"
 import { UserInput, UserTextArea } from "./components/user-input"
 import { SkeletonCard } from "./components/skeleton-card"
+import MailPage from "@/app/page"
 
 export const metadata: Metadata = {
   title: "Dashboard",
