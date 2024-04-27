@@ -1,6 +1,7 @@
 import { addDays, addHours, format, nextSaturday } from "date-fns"
 import {
   Archive,
+  ArchiveRestore,
   ArchiveX,
   Clock,
   BellPlus,
@@ -50,7 +51,7 @@ export function MailDisplay({ mail }: MailDisplayProps) {
           <Tooltip>
             <TooltipTrigger asChild>
               <Button variant="ghost" size="icon" disabled={!mail}>
-                <Archive className="h-4 w-4" />
+                <ArchiveRestore className="h-4 w-4" />
                 <span className="sr-only">Set High Priority</span>
               </Button>
             </TooltipTrigger>
@@ -59,7 +60,7 @@ export function MailDisplay({ mail }: MailDisplayProps) {
           <Tooltip>
             <TooltipTrigger asChild>
               <Button variant="ghost" size="icon" disabled={!mail}>
-                <ArchiveX className="h-4 w-4" />
+                <Archive className="h-4 w-4" />
                 <span className="sr-only">Set Medium Priority</span>
               </Button>
             </TooltipTrigger>
@@ -68,7 +69,7 @@ export function MailDisplay({ mail }: MailDisplayProps) {
           <Tooltip>
             <TooltipTrigger asChild>
               <Button variant="ghost" size="icon" disabled={!mail}>
-                <Trash2 className="h-4 w-4" />
+                <ArchiveX className="h-4 w-4" />
                 <span className="sr-only">Set Low Priority</span>
               </Button>
             </TooltipTrigger>

@@ -1,5 +1,6 @@
 import { ComponentProps } from "react"
 import { formatDistanceToNow } from "date-fns/formatDistanceToNow"
+import { FileBox, FileText, FileBarChart } from "lucide-react";
 
 import { cn } from "@/lib/utils"
 import { Badge } from "@/components/ui/badge"
@@ -13,6 +14,11 @@ interface MailListProps {
 
 export function MailList({ items }: MailListProps) {
   const [mail, setMail] = useMail()
+  const labelIcons: Record<string, JSX.Element> = {
+    PDF: <FileBox className="h-3 w-3 mr-2" />,
+    DOC: <FileText className="h-3 w-3 mr-2" />,
+    EXCEL: <FileBarChart className="h-3 w-3 mr-2" />,
+  };
 
   return (
     <ScrollArea className="h-screen">
@@ -35,15 +41,24 @@ export function MailList({ items }: MailListProps) {
               <div className="flex items-center">
                 <div className="flex items-center gap-2">
                   <div className="font-semibold">{item.name}</div>
-                  {!item.read && (
-                    <span className="flex h-2 w-2 rounded-full bg-red-600" />
+                  {item.read && (
+                    <span
+                      className={`flex h-2 w-2 rounded-full ${item.read === 1
+                        ? "bg-red-600"
+                        : item.read === 2
+                          ? "bg-green-600"
+                          : item.read === 3
+                            ? "bg-gray-300"
+                            : ""
+                        }`}
+                    />
                   )}
                 </div>
                 <div
                   className={cn(
                     "ml-auto text-xs",
                     mail.selected === item.id
-                      ? "text-foreground"
+                      ? "text-foreground text-red-500"
                       : "text-muted-foreground"
                   )}
                 >
@@ -60,7 +75,8 @@ export function MailList({ items }: MailListProps) {
             {item.labels.length ? (
               <div className="flex items-center gap-2">
                 {item.labels.map((label) => (
-                  <Badge key={label} variant="outline">
+                  <Badge key={label} variant="outline" className="items-center">
+                    {labelIcons[label]}
                     {label}
                   </Badge>
                 ))}

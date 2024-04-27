@@ -70,18 +70,21 @@ export function Mail({
                   className="text-zinc-600 dark:text-zinc-200"
                 >
                   High Priority
+                  <span className="flex h-2 w-2 ml-2 rounded-full bg-red-600" />
                 </TabsTrigger>
                 <TabsTrigger
                   value="medium"
                   className="text-zinc-600 dark:text-zinc-200"
                 >
                   Medium Priority
+                  <span className="flex h-2 w-2 ml-2 rounded-full bg-green-600" />
                 </TabsTrigger>
                 <TabsTrigger
                   value="low"
                   className="text-zinc-600 dark:text-zinc-200"
                 >
                   Low Priority
+                  <span className="flex h-2 w-2 ml-2 rounded-full bg-gray-400" />
                 </TabsTrigger>
               </TabsList>
 
@@ -100,8 +103,14 @@ export function Mail({
             <TabsContent value="all" className="m-0">
               <MailList items={mails} />
             </TabsContent>
-            <TabsContent value="unread" className="m-0">
-              <MailList items={mails.filter((item) => !item.read)} />
+            <TabsContent value="high" className="m-0">
+              <MailList items={mails.filter((item) => item.read === 1)} />
+            </TabsContent>
+            <TabsContent value="medium" className="m-0">
+              <MailList items={mails.filter((item) => item.read === 2)} />
+            </TabsContent>
+            <TabsContent value="low" className="m-0">
+              <MailList items={mails.filter((item) => item.read === 3)} />
             </TabsContent>
           </Tabs>
         </ResizablePanel>
