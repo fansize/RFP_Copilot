@@ -1,5 +1,6 @@
 "use client"
 import { useChat } from 'ai/react';
+import { useState } from 'react';
 import { addDays, addHours, format, nextSaturday } from "date-fns"
 import {
   Archive,
@@ -51,8 +52,27 @@ interface MailDisplayProps {
 
 export function MailDisplay({ mail }: MailDisplayProps) {
   const { messages, input, handleInputChange, handleSubmit } = useChat();
+  const [placeholder, setPlaceholder] = useState("Type your question about the RFP here.");
   const today = new Date()
-  const labels: string[] = ["Give the amount of RPF", "Give some advices", "Analysis risks"];
+  const labels: string[] = ["Summarize the RPF", "Give address of client", "Give client info"];
+
+  const mockOutput = `
+  Client Summary: John Smith at Acme Corp
+
+  John Smith, Procurement Manager at Acme Corp, is overseeing a significant upgrade of the company's computing hardware to enhance operational efficiency and support new software deployments. His focus is on securing high-performance laptops that meet stringent technical requirements to facilitate a seamless workflow. Cost-efficiency, reliability, and service support are pivotal, with a preference for solutions that offer the best long-term value in a high-end price segment.
+  
+  Product Features Required:
+  
+  Processor Type: Intel Core i7-1165G7 or better
+  RAM: 16GB
+  Storage Capacity: 512GB SSD
+  Screen Size: 14 inches Full HD with anti-glare
+  Battery Life: Minimum 10 hours
+  Price Range: Competitive within premium sectors
+  Operating System: Windows 10 Pro
+  Graphics: Integrated
+  Number of Products: 200 units
+  Warranty: 3-year comprehensive warranty`
 
   return (
     <div className="flex h-full flex-col">
@@ -165,15 +185,16 @@ export function MailDisplay({ mail }: MailDisplayProps) {
       {mail ? (
         <div className="flex flex-1 flex-col">
           <ScrollArea className='h-[480px]'>
-            <div className="flex-1 whitespace-pre-wrap p-4 text-sm">
-              {/* {mail.text} */}
-              {messages.map(m => (
+            {messages.length > 0 ? (
+              messages.map(m => (
                 <div key={m.id} className="whitespace-pre-wrap">
                   {m.role === 'user' ? 'User: ' : 'RFP Copilot: '}
                   {m.content}
                 </div>
-              ))}
-            </div>
+              ))
+            ) : (
+              <div className="whitespace-pre-wrap p-4">{mockOutput}</div>
+            )}
           </ScrollArea>
           {/* <Separator className="mt-auto" /> */}
           <div className="p-4">
@@ -183,13 +204,13 @@ export function MailDisplay({ mail }: MailDisplayProps) {
                   className="p-4"
                   value={input}
                   onChange={handleInputChange}
-                  placeholder="Type your question about the RFP here."
+                  placeholder={placeholder}
                 />
                 <div className="flex items-center">
                   {labels.length ? (
                     <div className="flex items-center gap-2">
                       {labels.map((label) => (
-                        <Badge key={label} variant="outline">
+                        <Badge key={label} variant="outline" onClick={() => setPlaceholder(label)}>
                           {label}
                         </Badge>
                       ))}
