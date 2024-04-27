@@ -57,7 +57,7 @@ export const mails = [
     similarity: 0.99,
   },
   {
-    id: "61c35085-72d7-42b4-8d62-738f700d4b92",
+    id: "61c35085-72d7-42b4-8d62-738f700d4b72",
     name: "David Lee",
     email: "emilydavis@example.com",
     subject: "Request for Proposal: Enterprise-Wide Mobile Computing Solution",
@@ -68,7 +68,7 @@ export const mails = [
     similarity: 0.44,
   },
   {
-    id: "8f7b5db9-d935-4e42-8e05-1f1d0a3dfb97",
+    id: "8f7b5db9-d935-4e42-8e05-1f1d0s3dfb97",
     name: "Lucas Werner",
     email: "michaelwilson@example.com",
     subject: "RFP for Supply of Ultra-Portable Laptops for Sales Force Modernization",

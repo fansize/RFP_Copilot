@@ -45,6 +45,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip"
 import { Mail } from "@/app/mail/data"
+import Image from 'next/image';
 
 interface MailDisplayProps {
   mail: Mail | null
@@ -56,23 +57,7 @@ export function MailDisplay({ mail }: MailDisplayProps) {
   const today = new Date()
   const labels: string[] = ["Summarize the RPF", "Give address of client", "Give client info"];
 
-  const mockOutput = `
-  Client Summary: John Smith at Acme Corp
-
-  John Smith, Procurement Manager at Acme Corp, is overseeing a significant upgrade of the company's computing hardware to enhance operational efficiency and support new software deployments. His focus is on securing high-performance laptops that meet stringent technical requirements to facilitate a seamless workflow. Cost-efficiency, reliability, and service support are pivotal, with a preference for solutions that offer the best long-term value in a high-end price segment.
-  
-  Product Features Required:
-  
-  Processor Type: Intel Core i7-1165G7 or better
-  RAM: 16GB
-  Storage Capacity: 512GB SSD
-  Screen Size: 14 inches Full HD with anti-glare
-  Battery Life: Minimum 10 hours
-  Price Range: Competitive within premium sectors
-  Operating System: Windows 10 Pro
-  Graphics: Integrated
-  Number of Products: 200 units
-  Warranty: 3-year comprehensive warranty`
+  const mockOutput = "Type some questions about the RFP"
 
   return (
     <div className="flex h-full flex-col">
@@ -184,7 +169,7 @@ export function MailDisplay({ mail }: MailDisplayProps) {
 
       {mail ? (
         <div className="flex flex-1 flex-col">
-          <ScrollArea className='h-[480px]'>
+          <ScrollArea className='text-sm h-[480px] px-4 pt-4'>
             {messages.length > 0 ? (
               messages.map(m => (
                 <div key={m.id} className="whitespace-pre-wrap">
@@ -193,7 +178,9 @@ export function MailDisplay({ mail }: MailDisplayProps) {
                 </div>
               ))
             ) : (
-              <div className="whitespace-pre-wrap p-4">{mockOutput}</div>
+              <div className="flex items-center justify-center whitespace-pre-wrap p-4">
+                <Image src="/placeholder.png" alt='' width="400" height="400" />
+              </div>
             )}
           </ScrollArea>
           {/* <Separator className="mt-auto" /> */}
