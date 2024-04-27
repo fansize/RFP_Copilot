@@ -1,3 +1,5 @@
+"use client"
+import { useChat } from 'ai/react';
 import { addDays, addHours, format, nextSaturday } from "date-fns"
 import {
   Archive,
@@ -20,6 +22,7 @@ import {
 import { Button } from "@/components/ui/button"
 import { Calendar } from "@/components/ui/calendar"
 import { Badge } from "@/components/ui/badge"
+import { ScrollArea } from "@/components/ui/scroll-area"
 import {
   Popover,
   PopoverContent,
@@ -40,8 +43,9 @@ interface MailDisplayProps {
 }
 
 export function MailDisplay({ mail }: MailDisplayProps) {
+  const { messages, input, handleInputChange, handleSubmit } = useChat();
   const today = new Date()
-  const labels: string[] = ["Lists", "Give some advices"];
+  const labels: string[] = ["Give the amount of RPF", "Give some advices", "Analysis risks"];
 
   return (
     <div className="flex h-full flex-col">
@@ -142,15 +146,25 @@ export function MailDisplay({ mail }: MailDisplayProps) {
 
       {mail ? (
         <div className="flex flex-1 flex-col">
-          <div className="flex-1 whitespace-pre-wrap p-4 text-sm">
-            {mail.text}
-          </div>
+          <ScrollArea className='h-[480px]'>
+            <div className="flex-1 whitespace-pre-wrap p-4 text-sm">
+              {/* {mail.text} */}
+              {messages.map(m => (
+                <div key={m.id} className="whitespace-pre-wrap">
+                  {m.role === 'user' ? 'User: ' : 'RFP Copilot: '}
+                  {m.content}
+                </div>
+              ))}
+            </div>
+          </ScrollArea>
           {/* <Separator className="mt-auto" /> */}
           <div className="p-4">
-            <form>
+            <form onSubmit={handleSubmit}>
               <div className="grid gap-4">
                 <Textarea
                   className="p-4"
+                  value={input}
+                  onChange={handleInputChange}
                   placeholder="Type your question about the RFP here."
                 />
                 <div className="flex items-center">
@@ -164,7 +178,7 @@ export function MailDisplay({ mail }: MailDisplayProps) {
                     </div>
                   ) : null}
                   <Button
-                    onClick={(e) => e.preventDefault()}
+                    type='submit'
                     size="sm"
                     className="ml-auto"
                   >
